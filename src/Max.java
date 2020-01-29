@@ -121,8 +121,7 @@ public class Max {
         while (!direction.equals("Q")) {
             direction = getDirection();
             switch (direction) {
-                case "S":
-                    foyer();
+                case "S":                     foyer();
                     break;
                 case "W":
                     library();
