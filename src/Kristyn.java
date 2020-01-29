@@ -30,7 +30,7 @@ public class Kristyn {
         roomdir.put(2, direction);
         roomdir.put(3, direction);
         roomdir.put(4, direction);
-        roomdir.put(5, (direction);
+        roomdir.put(5, direction);
         roomdir.put(6, "Vault");
         roomdir.put(7, "Parlor");
         roomdir.put(8, "Secret Room");
