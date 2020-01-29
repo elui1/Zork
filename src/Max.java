@@ -2,13 +2,13 @@ import java.util.*;
 
 public class Max {
 
-//    static HashMap<Integer, String> roomNames = new HashMap<>();
+    static HashMap<Integer, String> roomNames = new HashMap<>();
     static HashMap<Integer, String> roomContains = new HashMap<>();
     static HashMap<Integer, String> roomDirections = new HashMap<>();
     static int count = 0;
     static String direction="";
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public static void main(String[] args) {
 //        roomNames.put(1, "foyer");
 //        roomNames.put(2, "front room");
@@ -41,7 +41,6 @@ public class Max {
         foyer();
         finalScore();
 
-
     }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -70,7 +69,7 @@ public class Max {
     public static void foyer(){
         count++;
         System.out.println();
-        System.out.println("You have entered the foyer.");
+        System.out.println("You have entered the FOYER");
         System.out.println("This room contains: "+roomContains.get(1));
         System.out.println("Door directions: "+roomDirections.get(1));
         System.out.println();
@@ -91,7 +90,7 @@ public class Max {
     public static void frontRoom() {
         count++;
         System.out.println();
-        System.out.println("You have entered the front room.");
+        System.out.println("You have entered the FRONT ROOM");
         System.out.println("This room contains: " + roomContains.get(2));
         System.out.println("Door directions: " + roomDirections.get(2));
         System.out.println();
@@ -115,7 +114,7 @@ public class Max {
     public static void library(){
         count++;
         System.out.println();
-        System.out.println("You have entered the library.");
+        System.out.println("You have entered the LIBRARY");
         System.out.println("This room contains: "+roomContains.get(3));
         System.out.println("Door directions: "+roomDirections.get(3));
         System.out.println();
@@ -136,7 +135,7 @@ public class Max {
     public static void kitchen(){
         count++;
         System.out.println();
-        System.out.println("You have entered the kitchen.");
+        System.out.println("You have entered the KITCHEN");
         System.out.println("This room contains: "+roomContains.get(4));
         System.out.println("Door directions: "+roomDirections.get(4));
         System.out.println();
@@ -157,7 +156,7 @@ public class Max {
     public static void diningRoom(){
         count++;
         System.out.println();
-        System.out.println("You have entered the dining room.");
+        System.out.println("You have entered the DINING ROOM");
         System.out.println("This room contains: "+roomContains.get(5));
         System.out.println("Door directions: "+roomDirections.get(5));
         System.out.println();
@@ -177,7 +176,7 @@ public class Max {
     public static void vault(){
         count++;
         System.out.println();
-        System.out.println("You have entered the vault.");
+        System.out.println("You have entered the VAULT");
         System.out.println("This room contains: "+roomContains.get(6));
         System.out.println("Door directions: "+roomDirections.get(6));
         System.out.println();
@@ -187,6 +186,9 @@ public class Max {
             switch (direction) {
                 case "E": parlor(); break;
                 //25% chance of ROOM 8
+
+
+
                 case "Q": break;
                 default:
                     System.out.println("Invalid input");
@@ -198,7 +200,7 @@ public class Max {
     public static void parlor(){
         count++;
         System.out.println();
-        System.out.println("You have entered the parlor.");
+        System.out.println("You have entered the PARLOR");
         System.out.println("This room contains: "+roomContains.get(7));
         System.out.println("Door directions: "+roomDirections.get(7));
         System.out.println();
