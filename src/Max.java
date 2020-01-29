@@ -37,26 +37,9 @@ public class Max {
         roomDirections.put(7, "West or South");
         roomDirections.put(8, "West");
 
-        Scanner sc = new Scanner(System.in);
-
-//////////////////////////////////////////////////////////////////////////
-
         welcome();
         foyer();
-        finalscore();
-
-//        room(1);
-//        String direction = getDirection();
-//        switch (direction){
-//            case "N": room(1);
-//            case "S": room(2);
-//            case "E": room(6);
-//            case "W": room(4);
-//
-//            default:
-//                System.out.println("Invalid input");
-//                getDirection();
-//        }
+        finalScore();
 
 
     }
@@ -66,7 +49,6 @@ public class Max {
         System.out.println("          *** Welcome to CASTLE ZORK ***");
         System.out.println("Search the castle rooms to find the hidden treasure!");
         System.out.println("----------------------------------------------------");
-        //System.out.println("Press ENTER to the castle and begin");
     }
 
     public static String getDirection(){
@@ -93,15 +75,11 @@ public class Max {
         System.out.println("Door directions: "+roomDirections.get(1));
         System.out.println();
 
-
         while (!direction.equals("Q")){
             direction = getDirection();
             switch (direction){
-                case "N":
-                    frontRoom();
-                    break;
-                case "Q":
-                    break;
+                case "N": frontRoom(); break;
+                case "Q": break;
                 default:
                     System.out.println("Invalid input");
                     break;
@@ -121,16 +99,10 @@ public class Max {
         while (!direction.equals("Q")) {
             direction = getDirection();
             switch (direction) {
-                case "S":                     foyer();
-                    break;
-                case "W":
-                    library();
-                    break;
-                case "E":
-                    kitchen();
-                    break;
-                case "Q":
-                    break;
+                case "S": foyer(); break;
+                case "W": library(); break;
+                case "E": kitchen(); break;
+                case "Q": break;
                 default:
                     System.out.println("Invalid input");
                     break;
@@ -148,16 +120,17 @@ public class Max {
         System.out.println("Door directions: "+roomDirections.get(3));
         System.out.println();
 
-        String direction = getDirection();
-        switch (direction) {
-            case "E": frontRoom();
-            case "N": diningRoom();
-            case "Q": break;
-            default:
-                System.out.println("Invalid input");
-                getDirection();
+        while (!direction.equals("Q")) {
+            direction = getDirection();
+            switch (direction) {
+                case "E": frontRoom(); break;
+                case "N": diningRoom(); break;
+                case "Q": break;
+                default:
+                    System.out.println("Invalid input");
+                    break;
+            }
         }
-        System.out.print("outside the library siwtch");
     }
 
     public static void kitchen(){
@@ -167,6 +140,18 @@ public class Max {
         System.out.println("This room contains: "+roomContains.get(4));
         System.out.println("Door directions: "+roomDirections.get(4));
         System.out.println();
+
+        while (!direction.equals("Q")) {
+            direction = getDirection();
+            switch (direction) {
+                case "W": frontRoom(); break;
+                case "N": parlor(); break;
+                case "Q": break;
+                default:
+                    System.out.println("Invalid input");
+                    break;
+            }
+        }
     }
 
     public static void diningRoom(){
@@ -176,6 +161,17 @@ public class Max {
         System.out.println("This room contains: "+roomContains.get(5));
         System.out.println("Door directions: "+roomDirections.get(5));
         System.out.println();
+
+        while (!direction.equals("Q")) {
+            direction = getDirection();
+            switch (direction) {
+                case "S": library(); break;
+                case "Q": break;
+                default:
+                    System.out.println("Invalid input");
+                    break;
+            }
+        }
     }
 
     public static void vault(){
@@ -185,6 +181,18 @@ public class Max {
         System.out.println("This room contains: "+roomContains.get(6));
         System.out.println("Door directions: "+roomDirections.get(6));
         System.out.println();
+
+        while (!direction.equals("Q")) {
+            direction = getDirection();
+            switch (direction) {
+                case "E": parlor(); break;
+                //25% chance of ROOM 8
+                case "Q": break;
+                default:
+                    System.out.println("Invalid input");
+                    break;
+            }
+        }
     }
 
     public static void parlor(){
@@ -194,6 +202,18 @@ public class Max {
         System.out.println("This room contains: "+roomContains.get(7));
         System.out.println("Door directions: "+roomDirections.get(7));
         System.out.println();
+
+        while (!direction.equals("Q")) {
+            direction = getDirection();
+            switch (direction) {
+                case "W": vault(); break;
+                case "S": kitchen(); break;
+                case "Q": break;
+                default:
+                    System.out.println("Invalid input");
+                    break;
+            }
+        }
     }
 
     public static void secretRoom(){
@@ -203,9 +223,20 @@ public class Max {
         System.out.println("This room contains: "+roomContains.get(8));
         System.out.println("Door directions: "+roomDirections.get(8));
         System.out.println();
+
+        while (!direction.equals("Q")) {
+            direction = getDirection();
+            switch (direction) {
+                case "W": vault(); break;
+                case "Q": break;
+                default:
+                    System.out.println("Invalid input");
+                    break;
+            }
+        }
     }
 
-    public static void finalscore(){
+    public static void finalScore(){
         System.out.println();
         System.out.println("You have left CASTLE ZORK");
         System.out.print("Number of rooms visited: "+count);
