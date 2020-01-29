@@ -83,6 +83,7 @@ public class Eric {
             }
             //direction = getDirection();
         }
+    }
 
 
     public static void library() {
