@@ -8,16 +8,8 @@ public class Max {
     static int count = 0;
     static String direction="";
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public static void main(String[] args) {
-//        roomNames.put(1, "foyer");
-//        roomNames.put(2, "front room");
-//        roomNames.put(3, "library");
-//        roomNames.put(4, "kitchen");
-//        roomNames.put(5, "dining room");
-//        roomNames.put(6, "vault");
-//        roomNames.put(7, "parlor");
-//        roomNames.put(8, "secret room");
 
         roomContains.put(1, "dead scorpion");
         roomContains.put(2, "piano");
@@ -56,13 +48,24 @@ public class Max {
         return (sc.nextLine().toUpperCase());
     }
 
-//    public static void room(int x){
-//        System.out.println();
-//        System.out.println("You have entered the "+roomNames.get(x));
-//        System.out.println("This room contains: "+roomContains.get(x));
-//        System.out.println("Door directions: "+roomDirections.get(x));
-//        System.out.println();
-//    }
+    public static int randomNumber(int x){
+        Random rand = new Random();
+        return rand.nextInt(x);
+    }
+
+    public static void finalScore(){
+        System.out.println();
+        System.out.println("You have left CASTLE ZORK");
+        System.out.println("Number of rooms visited: "+count);
+
+        // 1/4 random Ghost following
+        int ghost = randomNumber(4);
+        System.out.println("(ghost randnum: "+ghost+")");
+        if(ghost==0){
+            System.out.println("A wandering ghost follows you out of the castle");
+        }
+
+    }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -108,8 +111,6 @@ public class Max {
             }
         }
     }
-
-
 
     public static void library(){
         count++;
@@ -184,10 +185,14 @@ public class Max {
         while (!direction.equals("Q")) {
             direction = getDirection();
             switch (direction) {
-                case "E": parlor(); break;
-                //25% chance of ROOM 8
-
-
+                case "E":
+                    int findSecret = randomNumber(4);
+                    System.out.println("(findSecret randnum: "+findSecret+")");
+                    if(findSecret==0){
+                        secretRoom(); break;
+                    } else {
+                        parlor(); break;
+                    }
 
                 case "Q": break;
                 default:
@@ -238,13 +243,16 @@ public class Max {
         }
     }
 
-    public static void finalScore(){
-        System.out.println();
-        System.out.println("You have left CASTLE ZORK");
-        System.out.print("Number of rooms visited: "+count);
-        // 1/4 random Ghost following
-    }
-
-
-
 }
+
+
+//        ********* UNUSED CODE ********
+
+//        roomNames.put(1, "foyer");
+//        roomNames.put(2, "front room");
+//        roomNames.put(3, "library");
+//        roomNames.put(4, "kitchen");
+//        roomNames.put(5, "dining room");
+//        roomNames.put(6, "vault");
+//        roomNames.put(7, "parlor");
+//        roomNames.put(8, "secret room");
