@@ -246,7 +246,7 @@ public class Kristyn {
     }
 
     public static void vault() {
-
+        Random Random = new Random(System.currentTimeMillis());
         System.out.println("Welcome to the Vault");
         System.out.println("The items in this room include: " + roomslist.get("Vault"));
 
@@ -282,36 +282,34 @@ public class Kristyn {
 
     public static void secret_room() {
 
-        System.out.println("Welcome to the Secret Room!");
-        System.out.println("The items in this room include: " + roomslist.get("Secret Room"));
+        System.out.println("Welcome to the Vault");
+        System.out.println("The items in this room include: " + roomslist.get("Vault"));
 
         Scanner sc = new Scanner(System.in);
         String direction;// = sc.nextLine();
-//            for(String key:roomslist.keySet(){
+//            for(String key:roomslist.keySet()){
 //                System.out.println(key);
 //            }
         String quit = "c";
         while (!quit.equalsIgnoreCase("q")) {
-            System.out.println("You Win");
+            System.out.println("What direction do you go or press q to end game");
+            direction = sc.next();
             if (direction.equalsIgnoreCase("q")) {
                 break;
-          /*  } else {
+            } else {
                 switch (direction) {
-                    case "e":
-                        if (Random.nextInt(4) == 0) {
-                            secret_room();
-                        } else {
-                            parlor();
-                        }
+                    case "w": parlor();
                         quit = "q";
                         break;
                     default:
                         System.out.println("Not a valid direction.");
                         foyer();
-                        break;*/
-                }
+                        break;
+                }//end of switch
             }
-        }//end of switch
+        }
+    }
+
 
 
     }
