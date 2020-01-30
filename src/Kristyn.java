@@ -1,7 +1,7 @@
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Scanner;
-
+import java.util.Random;
 
 public class Kristyn {
     //initialize hashmap for roomlist and make available to all methods
@@ -264,11 +264,11 @@ public class Kristyn {
             } else {
                 switch (direction) {
                     case "e":
-                        parlor();
-                        quit = "q";
-                        break;
-                    case "e":
-                        secret_room();
+                        if (Random.nextInt(4) == 0) {
+                            secret_room();
+                        } else {
+                            parlor();
+                        }
                         quit = "q";
                         break;
                     default:
@@ -287,7 +287,7 @@ public class Kristyn {
 
         Scanner sc = new Scanner(System.in);
         String direction;// = sc.nextLine();
-//            for(String key:roomslist.keySet()){
+//            for(String key:roomslist.keySet(){
 //                System.out.println(key);
 //            }
         String quit = "c";
@@ -295,24 +295,23 @@ public class Kristyn {
             System.out.println("You Win");
             if (direction.equalsIgnoreCase("q")) {
                 break;
-            } else {
+          /*  } else {
                 switch (direction) {
                     case "e":
-                        parlor();
-                        quit = "q";
-                        break;
-                    case "e":
-                        secret_room();
+                        if (Random.nextInt(4) == 0) {
+                            secret_room();
+                        } else {
+                            parlor();
+                        }
                         quit = "q";
                         break;
                     default:
                         System.out.println("Not a valid direction.");
                         foyer();
-                        break;
+                        break;*/
                 }
             }
         }//end of switch
 
 
     }
-}
