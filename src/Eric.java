@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.Random;
 
 public class Eric {
     public static HashMap<Integer, String> roomMap;
@@ -29,30 +30,44 @@ public class Eric {
         roomObject.put(7, "treasure chest");
         roomObject.put(8, "piles of gold");
     }
-    //public static Scanner input = new Scanner(System.in);
+
     public static String direction = "";
+    public static boolean foundSecret;
+    public static int counter = 0;
 
     public static void main(String[] args) {
         System.out.println("Welcome to Zork!");
         foyer();
 
+        Random rand = new Random();
+        int ghost = rand.nextInt(4);
+
+        if (ghost == 0) {
+            System.out.println("You are being followed by a ghost");
+        }
+
+        System.out.println("You visited " + counter + " rooms");
     }
 
     public static String getDirection(){
         Scanner sc = new Scanner(System.in);
         System.out.print("Which direction will you take? (N,S,E,W, or Q to quit) ");
-        String direction = sc.next();
+        String direction = sc.next().toUpperCase();
         return direction;
     }
 
     public static void foyer() {
+        counter++;
         System.out.println("You have entered the " + roomMap.get(1));
         System.out.println("This room contains " + roomObject.get(1));
-        while (!direction.equalsIgnoreCase("Q")) {
+
+        while (!direction.equals("Q")) {
             direction = getDirection();
             switch (direction) {
                 case "N":
                     frontRoom();
+                    break;
+                case "Q":
                     break;
                 default:
                     System.out.println("Invalid direction. Try again.");
@@ -62,35 +77,38 @@ public class Eric {
     }
 
     public static void frontRoom() {
+        counter++;
         System.out.println("You have entered the " + roomMap.get(2));
         System.out.println("This room contains " + roomObject.get(2));
-        //String direction = getDirection();
-        while (!direction.equalsIgnoreCase("Q")) {
-            String direction = getDirection();
+
+        while (!direction.equals("Q")) {
+            direction = getDirection();
             switch (direction) {
                 case "S":
                     foyer();
                     break;
-//                case "W":
-//                    library();
-//                    break;
-//                case "E":
-//                    kitchen();
-//                    break;
+                case "W":
+                    library();
+                    break;
+                case "E":
+                    kitchen();
+                    break;
+                case "Q":
+                    break;
                 default:
                     System.out.println("Invalid direction. Try again.");
                     break;
             }
-            //direction = getDirection();
         }
     }
 
-
     public static void library() {
+        counter++;
         System.out.println("You have entered the " + roomMap.get(3));
         System.out.println("This room contains " + roomObject.get(3));
-        String direction = getDirection();
-        //while (!direction.equalsIgnoreCase("Q")) {
+
+        while (!direction.equals("Q")) {
+            direction = getDirection();
             switch (direction) {
                 case "E":
                     frontRoom();
@@ -98,19 +116,22 @@ public class Eric {
                 case "N":
                     diningRoom();
                     break;
+                case "Q":
+                    break;
                 default:
                     System.out.println("Invalid direction. Try again.");
                     break;
             }
-           // direction = getDirection();
         }
-
+    }
 
     public static void kitchen() {
+        counter++;
         System.out.println("You have entered the " + roomMap.get(4));
         System.out.println("This room contains " + roomObject.get(4));
-        String direction = getDirection();
-//        while (!direction.equalsIgnoreCase("Q")) {
+
+        while (!direction.equals("Q")) {
+            direction = getDirection();
             switch (direction) {
                 case "W":
                     frontRoom();
@@ -118,53 +139,95 @@ public class Eric {
                 case "N":
                     parlor();
                     break;
+                case "Q":
+                    break;
                 default:
                     System.out.println("Invalid direction. Try again.");
                     break;
             }
-          //  direction = getDirection();
         }
-
+    }
 
     public static void diningRoom() {
+        counter++;
         System.out.println("You have entered the " + roomMap.get(5));
         System.out.println("This room contains " + roomObject.get(5));
-        String direction = getDirection();
-        //while (!direction.equalsIgnoreCase("Q")) {
+
+        while (!direction.equals("Q")) {
+            direction = getDirection();
             switch (direction) {
                 case "S":
                     library();
                     break;
+                case "Q":
+                    break;
                 default:
                     System.out.println("Invalid direction. Try again.");
                     break;
             }
-           // direction = getDirection();
         }
-
+    }
 
     public static void vault() {
+        counter++;
         System.out.println("You have entered the " + roomMap.get(6));
         System.out.println("This room contains " + roomObject.get(6));
-        String direction = getDirection();
-        //while (!direction.equalsIgnoreCase("Q")) {
-            switch (direction) {
-                case "E":
-                    parlor();
-                    break;
-                default:
-                    System.out.println("Invalid direction. Try again.");
-                    break;
-            }
-            //direction = getDirection();
-        }
 
+        Random rand = new Random();
+        int secret = rand.nextInt(4);
+
+        while (!direction.equals("Q")) {
+            direction = getDirection();
+
+            if (foundSecret) {
+                switch (direction) {
+                    case "E":
+                        System.out.print("Do you want to go to the secret room (y/n)? ");
+                        Scanner sc = new Scanner(System.in);
+                        String enter = sc.next();
+                        if (enter.equals("y")) {
+                            secretRoom();
+                            break;
+                        }
+                        else {
+                            parlor();
+                            break;
+                        }
+                    case "Q":
+                        break;
+                    default:
+                        System.out.println("Invalid direction. Try again.");
+                        break;
+                }
+            }
+
+            else {
+                switch (direction) {
+                    case "E":
+                        if (secret == 0) {
+                            secretRoom();
+                            break;
+                        } else {
+                            parlor();
+                            break;
+                        }
+                    case "Q":
+                        break;
+                    default:
+                        System.out.println("Invalid direction. Try again.");
+                        break;
+                }
+            }
+        }
+    }
 
     public static void parlor() {
+        counter++;
         System.out.println("You have entered the " + roomMap.get(7));
         System.out.println("This room contains " + roomObject.get(7));
-        String direction = getDirection();
-        //while (!direction.equalsIgnoreCase("Q")) {
+
+        while (!direction.equals("Q")) {
+            direction = getDirection();
             switch (direction) {
                 case "W":
                     vault();
@@ -172,28 +235,34 @@ public class Eric {
                 case "S":
                     kitchen();
                     break;
+                case "Q":
+                    break;
                 default:
                     System.out.println("Invalid direction. Try again.");
                     break;
             }
-          //  direction = getDirection();
         }
-
+    }
 
     public static void secretRoom() {
+        counter++;
+        foundSecret = true;
         System.out.println("You have entered the " + roomMap.get(8));
         System.out.println("This room contains " + roomObject.get(8));
-        String direction = getDirection();
-        //while (!direction.equalsIgnoreCase("Q")) {
+
+        while (!direction.equals("Q")) {
+            direction = getDirection();
             switch (direction) {
                 case "W":
                     vault();
                     break;
+                case "Q":
+                    break;
                 default:
                     System.out.println("Invalid direction. Try again.");
                     break;
             }
-           // direction = getDirection();
         }
     }
+}
 

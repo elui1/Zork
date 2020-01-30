@@ -7,17 +7,10 @@ public class Max {
     static HashMap<Integer, String> roomDirections = new HashMap<>();
     static int count = 0;
     static String direction="";
+    static boolean foundSecret = false;
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public static void main(String[] args) {
-//        roomNames.put(1, "foyer");
-//        roomNames.put(2, "front room");
-//        roomNames.put(3, "library");
-//        roomNames.put(4, "kitchen");
-//        roomNames.put(5, "dining room");
-//        roomNames.put(6, "vault");
-//        roomNames.put(7, "parlor");
-//        roomNames.put(8, "secret room");
 
         roomContains.put(1, "dead scorpion");
         roomContains.put(2, "piano");
@@ -56,13 +49,25 @@ public class Max {
         return (sc.nextLine().toUpperCase());
     }
 
-//    public static void room(int x){
-//        System.out.println();
-//        System.out.println("You have entered the "+roomNames.get(x));
-//        System.out.println("This room contains: "+roomContains.get(x));
-//        System.out.println("Door directions: "+roomDirections.get(x));
-//        System.out.println();
-//    }
+    public static int randomNumber(int x){
+        Random rand = new Random();
+        return rand.nextInt(x);
+    }
+
+    public static void finalScore(){
+        System.out.println();
+        System.out.println("You have left CASTLE ZORK");
+        System.out.println("Number of rooms visited: "+count);
+
+        // 1/4 random Ghost following
+        int ghost = randomNumber(4);
+        if(ghost==0){
+            System.out.println("Look over your shoulder! A wandering ghost follows you out of the castle");
+        } else {
+            System.out.println("The coast is clear, you managed to escape the castle alone");
+        }
+
+    }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -108,8 +113,6 @@ public class Max {
             }
         }
     }
-
-
 
     public static void library(){
         count++;
@@ -181,19 +184,55 @@ public class Max {
         System.out.println("Door directions: "+roomDirections.get(6));
         System.out.println();
 
-        while (!direction.equals("Q")) {
-            direction = getDirection();
-            switch (direction) {
-                case "E": parlor(); break;
-                //25% chance of ROOM 8
-
-
-
-                case "Q": break;
-                default:
-                    System.out.println("Invalid input");
-                    break;
+        if(foundSecret) {
+            while (!direction.equals("Q")) {
+                direction = getDirection();
+                switch (direction) {
+                    case "E":
+                        System.out.print("Do you want to re-enter the secret room (Y/N)? ");
+                        Scanner sc = new Scanner(System.in);
+                        String enter = sc.next();
+                        if (enter.equalsIgnoreCase("Y")) {
+                            secretRoom();
+                            break;
+                        }
+                        else if(enter.equalsIgnoreCase("N")) {
+                            parlor();
+                            break;
+                        }
+                        else {
+                            System.out.println("Invalid input. You choose not to enter the secret room");
+                            parlor();
+                            break;
+                        }
+                    case "Q":
+                        break;
+                    default:
+                        System.out.println("Invalid input");
+                        break;
+                }
             }
+        } else {
+            while (!direction.equals("Q")) {
+                direction = getDirection();
+                switch (direction) {
+                    case "E":
+                        int findSecret = randomNumber(4);
+                        if (findSecret == 0) {
+                            secretRoom();
+                            break;
+                        } else {
+                            parlor();
+                            break;
+                        }
+                    case "Q":
+                        break;
+                    default:
+                        System.out.println("Invalid input");
+                        break;
+                }
+            }
+
         }
     }
 
@@ -220,8 +259,9 @@ public class Max {
 
     public static void secretRoom(){
         count++;
+        foundSecret = true;
         System.out.println();
-        System.out.println("You have found the SECRET ROOM!");
+        System.out.println("You have found the **SECRET ROOM!**");
         System.out.println("This room contains: "+roomContains.get(8));
         System.out.println("Door directions: "+roomDirections.get(8));
         System.out.println();
@@ -237,14 +277,5 @@ public class Max {
             }
         }
     }
-
-    public static void finalScore(){
-        System.out.println();
-        System.out.println("You have left CASTLE ZORK");
-        System.out.print("Number of rooms visited: "+count);
-        // 1/4 random Ghost following
-    }
-
-
 
 }
