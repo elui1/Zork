@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.Random;
 
 public class Eric {
     public static HashMap<Integer, String> roomMap;
@@ -29,13 +30,23 @@ public class Eric {
         roomObject.put(7, "treasure chest");
         roomObject.put(8, "piles of gold");
     }
-    //public static Scanner input = new Scanner(System.in);
+
     public static String direction = "";
+    public static boolean foundSecret;
+    public static int counter = 0;
 
     public static void main(String[] args) {
         System.out.println("Welcome to Zork!");
         foyer();
 
+        Random rand = new Random();
+        int ghost = rand.nextInt(4);
+
+        if (ghost == 0) {
+            System.out.println("You are being followed by a ghost");
+        }
+
+        System.out.println("You visited " + counter + " rooms");
     }
 
     public static String getDirection(){
@@ -46,6 +57,7 @@ public class Eric {
     }
 
     public static void foyer() {
+        counter++;
         System.out.println("You have entered the " + roomMap.get(1));
         System.out.println("This room contains " + roomObject.get(1));
 
@@ -65,6 +77,7 @@ public class Eric {
     }
 
     public static void frontRoom() {
+        counter++;
         System.out.println("You have entered the " + roomMap.get(2));
         System.out.println("This room contains " + roomObject.get(2));
 
@@ -89,8 +102,8 @@ public class Eric {
         }
     }
 
-
     public static void library() {
+        counter++;
         System.out.println("You have entered the " + roomMap.get(3));
         System.out.println("This room contains " + roomObject.get(3));
 
@@ -112,8 +125,8 @@ public class Eric {
         }
     }
 
-
     public static void kitchen() {
+        counter++;
         System.out.println("You have entered the " + roomMap.get(4));
         System.out.println("This room contains " + roomObject.get(4));
 
@@ -135,8 +148,8 @@ public class Eric {
         }
     }
 
-
     public static void diningRoom() {
+        counter++;
         System.out.println("You have entered the " + roomMap.get(5));
         System.out.println("This room contains " + roomObject.get(5));
 
@@ -155,28 +168,61 @@ public class Eric {
         }
     }
 
-
     public static void vault() {
+        counter++;
         System.out.println("You have entered the " + roomMap.get(6));
         System.out.println("This room contains " + roomObject.get(6));
 
+        Random rand = new Random();
+        int secret = rand.nextInt(4);
+
         while (!direction.equals("Q")) {
             direction = getDirection();
-            switch (direction) {
-                case "E":
-                    parlor();
-                    break;
-                case "Q":
-                    break;
-                default:
-                    System.out.println("Invalid direction. Try again.");
-                    break;
+
+            if (foundSecret) {
+                switch (direction) {
+                    case "E":
+                        System.out.print("Do you want to go to the secret room (y/n)? ");
+                        Scanner sc = new Scanner(System.in);
+                        String enter = sc.next();
+                        if (enter.equals("y")) {
+                            secretRoom();
+                            break;
+                        }
+                        else {
+                            parlor();
+                            break;
+                        }
+                    case "Q":
+                        break;
+                    default:
+                        System.out.println("Invalid direction. Try again.");
+                        break;
+                }
+            }
+
+            else {
+                switch (direction) {
+                    case "E":
+                        if (secret == 0) {
+                            secretRoom();
+                            break;
+                        } else {
+                            parlor();
+                            break;
+                        }
+                    case "Q":
+                        break;
+                    default:
+                        System.out.println("Invalid direction. Try again.");
+                        break;
+                }
             }
         }
     }
 
-
     public static void parlor() {
+        counter++;
         System.out.println("You have entered the " + roomMap.get(7));
         System.out.println("This room contains " + roomObject.get(7));
 
@@ -198,8 +244,9 @@ public class Eric {
         }
     }
 
-
     public static void secretRoom() {
+        counter++;
+        foundSecret = true;
         System.out.println("You have entered the " + roomMap.get(8));
         System.out.println("This room contains " + roomObject.get(8));
 
